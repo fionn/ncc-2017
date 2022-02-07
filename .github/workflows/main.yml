@@ -1,0 +1,35 @@
+name: CI
+
+on: push
+
+jobs:
+  test:
+    name: Lint and Run
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install --progress-bar off -r requirements.txt
+        pip install --progress-bar off pylint mypy
+
+    - name: Lint
+      run: pylint french_fries/* submarine/*
+
+    - name: Typecheck
+      run: mypy french_fries/ submarine/
+
+    - name: Run french_fries
+      run: ./french_fries/french_fries.py
+
+    - name: Run submarine
+      run: ./submarine/main.py

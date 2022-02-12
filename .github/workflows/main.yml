@@ -23,13 +23,16 @@ jobs:
         pip install --progress-bar off pylint mypy
 
     - name: Lint
-      run: pylint french_fries/* submarine/*
+      run: pylint french_fries/* submarine/* screen_app/*
 
     - name: Typecheck
-      run: mypy french_fries/ submarine/
+      run: mypy french_fries/ submarine/ screen_app/
 
     - name: Run french_fries
       run: ./french_fries/french_fries.py
 
     - name: Run submarine
       run: ./submarine/main.py
+
+    - name: Run screen_app
+      run: ./screen_app/screen_app.py
